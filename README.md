@@ -2,18 +2,49 @@
 Author: Eduard Trykoz
 
 ## Client/Server application to launch and track application on remote host.
-- server will request to launch an application with <application name>
-- client has to launch an application on his host. (Ex Notepad.exe)
-- client has to reply with success or failure
-- client has to reply with application status <Running> each second
-- when application is closed by other application, client also has to replay to the server
-- server can request to close application with <application name>
+- server is launched and waits for requests
+- client sends a request to launch an application
+- server launches an application (or reports a failure)
+- server replies with application status every second
+- client prints "<Running>" if application is alive or reports application's exit code otherwise
+- client can send requests to terminate an application
 
 ## Work Breakdown Structure
 WBS is available [here](/wbs.md)
 
 ## Build instructions:
-make clean && make all
+### Windows
+Install MinGW with MSYS ([guide](http://mingw.org/wiki/Getting_Started)) and git
+
+### Linux
+Install gcc, make and git
+
+### Building
+- Clone a repository:
+	```sh
+	git clone https://github.com/LyraLover/GL_task1.git
+	cd GL_task1
+	```
+
+- Build client:
+	```sh
+	make client
+	```
+
+- Build server:
+	```sh
+	make server
+	```
+
+- Build both:
+	```sh
+	make
+	```
+
+- Clean build tree:
+	```sh
+	make clean
+	```
 
 ## Examples:
 *To be written*
