@@ -3,7 +3,7 @@
 
 ### Windows:
 - winsocks2 for networking
-- WinAPI function WaitForSingleObject() for kill request from user
+- Sleep() and \_kbhit() for kill request
 
 ### Linux:
 - BSD sockets for networking
@@ -42,10 +42,15 @@
 		- recv() into uint16_t
 		- printf()
 	6. Ask if application must be terminated with 1-second timeout
-		1. Ask with timeout
-			- WaitForSingleObject() on Windows
-			- select() with timeout on Linux
-		2. Send a request to kill the application
+		1. Sleep for one second
+			- Sleep on Windows
+			- sleep on Linux
+		2. Check if there was an input
+			- \_kbhit() on Windows
+			- select() on Linux
+		3. Check if input is a newline
+			- getchar()
+		4. Send a request to kill the application
 			- send()
 	7. Print exit code of the application
 		- puts()
