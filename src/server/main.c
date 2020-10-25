@@ -2,24 +2,33 @@
 #include "process/process.h"
 
 #include <stdio.h>
+#include <string.h>
 
 static void handle_request(SOCKET client);
+static int parse_port(char *port);
+static _Noreturn void usage(char *program_name);
 
 int main(int argc, char **argv) {
+	int port;
+	if (argc == 1)
+		port = 9090;
+	else if (argc == 2) {
+		port = parse_port(argv[1]);
+		if (!port)
+			usage(argv[0]);
+	}
+	else
+		usage(argv[0]);
+
 	if (!init_wsa()) {
-		printf("WSAStartup failed");
+		fputs("WSAStartup failed\n", stderr);
 		return 1;
 	}
 
-	int port;
-	if (argc >= 2)
-		port = atoi(argv[1]);
-	else
-		port = 9090;
 
 	SOCKET server = init_server(port);
 	if (server == INVALID_SOCKET) {
-		printf("Could not create a server");
+		fputs("Could not create a server", stderr);
 		return 1;
 	}
 	while (1) {
@@ -55,4 +64,18 @@ static void handle_request(SOCKET client) {
 	} while (status);
 
 	free(args);
+}
+
+static int parse_port(char *port) {
+	long res;
+	char *end;
+	res = strtol(port, &end, 10);
+	if (*end || res <= 0 || res > 65536)
+		return 0;
+	return res;
+}
+
+static _Noreturn void usage(char *program_name) {
+	fprintf(stderr, "Usage: %s [port]\nDefault port is 9090\n", program_name);
+	exit(1);
 }
