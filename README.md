@@ -7,7 +7,7 @@ Author: Eduard Trykoz
 - server launches an application (or reports a failure)
 - server replies with application status every second
 - client prints "<Running>" if application is alive or reports application's exit code otherwise
-- client can send requests to terminate an application
+- client can send requests to terminate an application by pressing Enter
 
 ## Work Breakdown Structure
 WBS is available [here](/wbs.md)
@@ -47,4 +47,10 @@ Install gcc, make and git
 	```
 
 ## Examples:
-*To be written*
+Building, launching a server, launching an application and terminating it in different ways (Linux)
+
+![Example 1](/examples/example1.gif)
+
+Launching a server with non-default port and launching applications (Linux)
+
+![Example 2](/examples/example2.gif)
