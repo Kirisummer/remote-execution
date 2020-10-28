@@ -6,7 +6,7 @@ Author: Eduard Trykoz
 - client sends a request to launch an application
 - server launches an application (or reports a failure)
 - server replies with application status every second
-- client prints "<Running>" if application is alive or reports application's exit code otherwise
+- client prints "\<Running>" if application is alive or reports application's exit code otherwise
 - client can send requests to terminate an application by pressing Enter
 
 ## Work Breakdown Structure
